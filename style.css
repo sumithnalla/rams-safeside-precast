@@ -567,9 +567,10 @@ input {
 
 /* 7. Footer Section */
 .footer {
-    background-color: var(--dark-gray);
-    color: var(--white);
-    padding: 48px 16px 24px 16px;
+    background-color: #fff8f5;
+    color: var(--dark-gray);
+    padding: 64px 16px 32px 16px;
+    border-top: 1px solid #f6e6dc;
 }
 
 .footer-container {
@@ -589,24 +590,63 @@ input {
     width: auto;
     object-fit: contain;
     margin-bottom: 16px;
-    filter: brightness(0) invert(1); /* Converts dark logo to white for dark footer */
 }
 
 .company-desc {
-    font-size: 0.88rem;
-    color: #9ca3af;
+    font-size: 0.9rem;
+    color: var(--medium-gray);
     line-height: 1.6;
+    margin-bottom: 24px;
 }
 
+/* Social Connect */
+.social-connect h3 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark-gray);
+    margin-bottom: 12px;
+}
+
+.social-links {
+    display: flex;
+    gap: 12px;
+}
+
+.social-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    color: var(--dark-gray);
+    transition: var(--transition-fast);
+    text-decoration: none;
+}
+
+.social-card:hover {
+    color: var(--primary-orange);
+    border-color: var(--primary-orange);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Footer Services */
+.footer-services h3,
 .footer-contact h3 {
     font-family: var(--font-heading);
     font-size: 1.15rem;
-    color: var(--white);
+    color: var(--dark-gray);
     margin-bottom: 16px;
     position: relative;
     display: inline-block;
 }
 
+.footer-services h3::after,
 .footer-contact h3::after {
     content: '';
     display: block;
@@ -614,6 +654,26 @@ input {
     height: 2px;
     background-color: var(--primary-orange);
     margin-top: 4px;
+}
+
+.footer-services-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-services-list a {
+    color: var(--medium-gray);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: var(--transition-fast);
+    display: inline-block;
+}
+
+.footer-services-list a:hover {
+    color: var(--primary-orange);
+    transform: translateX(4px);
 }
 
 .contact-details {
@@ -626,8 +686,8 @@ input {
     display: flex;
     align-items: flex-start;
     gap: 12px;
-    font-size: 0.88rem;
-    color: #d1d5db;
+    font-size: 0.9rem;
+    color: var(--medium-gray);
 }
 
 .contact-item svg {
@@ -637,7 +697,7 @@ input {
 }
 
 .contact-item a {
-    color: #d1d5db;
+    color: var(--dark-gray);
     text-decoration: none;
     font-weight: 600;
     transition: var(--transition-fast);
@@ -649,12 +709,12 @@ input {
 
 .footer-bottom {
     max-width: 1200px;
-    margin: 32px auto 0 auto;
-    padding-top: 20px;
-    border-top: 1px solid #2d3139;
+    margin: 48px auto 0 auto;
+    padding-top: 24px;
+    border-top: 1px solid #ebdcd0;
     text-align: center;
-    font-size: 0.8rem;
-    color: #6b7280;
+    font-size: 0.82rem;
+    color: var(--medium-gray);
 }
 
 /* 8. Floating CTA buttons (Bottom Right) */

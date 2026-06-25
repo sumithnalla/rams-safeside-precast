@@ -62,6 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    const submitBtn = document.getElementById('submit-lead-btn');
+    const sourceInput = document.getElementById('form-source');
+
     // Handle Form Submission
     leadForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -103,23 +106,44 @@ document.addEventListener('DOMContentLoaded', () => {
             userPhoneInput.closest('.phone-input-wrapper').style.borderColor = '';
         }
 
-        // If form is valid, trigger success state
+        // If form is valid, trigger submit and redirect
         if (isValid) {
-            // Show Success UI
-            successPhoneSpan.textContent = `+91 ${phoneValue}`;
-            leadForm.style.display = 'none';
-            successCard.style.display = 'block';
-        }
-    });
+            // Disable submit button to prevent double submission
+            submitBtn.disabled = true;
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending Request...';
+            submitBtn.style.opacity = '0.7';
+            submitBtn.style.cursor = 'not-allowed';
 
-    // Reset Form from Success State
-    successResetBtn.addEventListener('click', () => {
-        // Clear inputs
-        userNameInput.value = '';
-        userPhoneInput.value = '';
-        
-        // Hide Success Card and Show Form
-        successCard.style.display = 'none';
-        leadForm.style.display = 'block';
+            // Construct form request payload
+            const formData = new URLSearchParams();
+            formData.append('name', nameValue);
+            formData.append('phone', phoneValue);
+            formData.append('source', sourceInput ? sourceInput.value : 'Website Lead');
+
+            // POST to Google Apps Script Web App
+            fetch('https://script.google.com/macros/s/AKfycbx0uGofufGZitR9C2nut_nh0_i-qFpEDwdkMy1yuhBZEIkinmUutNRzvDUA7e28Cspn/exec', {
+                method: 'POST',
+                mode: 'no-cors', // Prevents CORS redirect blocking, ensuring data gets sent safely
+                body: formData,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+            .then(() => {
+                // Redirect to thank you page
+                window.location.href = 'thank-you.html';
+            })
+            .catch(error => {
+                console.error('Submission error:', error);
+                alert('Connection issue. Please check your internet and try again.');
+                
+                // Reset button state
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText;
+                submitBtn.style.opacity = '1';
+                submitBtn.style.cursor = 'pointer';
+            });
+        }
     });
 });
